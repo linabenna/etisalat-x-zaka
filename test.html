@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Code Cracker - Computer Science</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #f7f9fc;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    header {
+      background-color: #ffffff;
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      height: 80px;
+      z-index: 1000;
+    }
+
+    header h1 {
+      color: #3b82f6;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    header h1::before {
+      content: "";
+      background-image: url('https://cdn-icons-png.flaticon.com/512/3135/3135715.png');
+      width: 30px;
+      height: 30px;
+      background-size: contain;
+      display: inline-block;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #555;
+      font-weight: 500;
+      margin-left: 30px;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #3b82f6;
+    }
+
+    .title {
+      font-size: 32px;
+      font-weight: 600;
+      margin: 30px 40px 10px;
+      padding: 40px 40px 30px;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 0 20px 40px;
+    }
+
+    .sidebar {
+      flex: 0 0 180px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .sidebar button {
+      padding: 10px 12px;
+      border: 1px solid #e0e0e0;
+      background-color: white;
+      text-align: left;
+      font-size: 14px;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.1s;
+    }
+
+    .sidebar button:hover {
+      background-color: #f0f4ff;
+    }
+
+    .sidebar button.active {
+      background-color: #e0ecff;
+      font-weight: 600;
+      border: 1px solid #3b82f6;
+    }
+
+    .main {
+      flex: 1 1 500px;
+      min-width: 300px;
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .question-box {
+      background-color: #eef4ff;
+      padding: 20px;
+      border-radius: 10px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .textarea-box textarea {
+      width: 100%;
+      height: 120px;
+      padding: 12px;
+      font-size: 15px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      resize: vertical;
+    }
+
+    .control-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      align-items: center;
+      margin-left: auto;
+    }
+
+    .control-panel button {
+      width: 50px;
+      height: 50px;
+      font-size: 20px;
+      border-radius: 12px;
+      border: none;
+      background-color: #3b82f6;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: background-color 0.3s;
+    }
+
+    .control-panel button:hover {
+      background-color: #2563eb;
+    }
+
+    nav {
+        display: flex;
+        align-items: left;
+        gap: 20px;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: white;
+        min-width: 200px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-top: 5px;
+    }
+
+    .dropdown-content a {
+        display: block;
+        padding: 10px 15px;
+        margin-left: 0px;
+        color: black;
+        text-decoration: none;
+        font-weight: normal;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #f0f0f0;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        padding: 0 20px;
+      }
+
+      .sidebar {
+        flex-direction: row;
+        overflow-x: auto;
+      }
+
+      .sidebar button {
+        flex-shrink: 0;
+        min-width: 120px;
+      }
+
+      .control-panel {
+        flex-direction: row;
+        justify-content: flex-end;
+        margin-top: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Code Cracker</h1>
+    <nav>
+        <a href="#">Home</a>
+        <div class="dropdown">
+          <a href="#">Subjects ▾</a>
+          <div class="dropdown-content">
+            <a href="#">Computer Science</a>
+            <a href="#">Math</a>
+            <a href="#">Biology</a>
+            <a href="#">Physics</a>
+          </div>
+        </div>
+        <a href="#">Login</a>
+      </nav>      
+  </header>
+
+  <div class="title">Computer Science</div>
+
+  <div class="container">
+    <div class="sidebar" id="question-list">
+      <!-- Buttons dynamically inserted here -->
+    </div>
+
+    <div class="main">
+      <div class="question-box" id="question-display">
+        Question 1
+      </div>
+      <div class="textarea-box">
+        <textarea placeholder="Submit your solution"></textarea>
+      </div>
+    </div>
+
+    <div class="control-panel">
+      <button title="Help">?</button>
+      <button title="Clear">C</button>
+    </div>
+  </div>
+
+  <script>
+    const questions = [
+      "Given an array of integers nums and an integer target, return the indices of the two numbers such that they add up to target. \nYou may assume that each input would have exactly one solution, and you may not use the same element twice. \nYou can return the answer in any order.",
+      "Explain quicksort algorithm.",
+      "Define polymorphism.",
+      "What is a pointer?",
+      "Describe Dijkstra’s algorithm.",
+      "What is the OSI model?",
+      "Explain recursion.",
+      "What is a hash table?",
+      "Define Big O notation.",
+      "What is a linked list?",
+      "Describe virtual memory.",
+      "What is inheritance?"
+    ];
+
+    const questionList = document.getElementById('question-list');
+    const questionDisplay = document.getElementById('question-display');
+
+    questions.forEach((q, index) => {
+      const btn = document.createElement('button');
+      btn.textContent = `Q${index + 1}`;
+      if (index === 0) btn.classList.add('active');
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.sidebar button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        questionDisplay.textContent = q;
+      });
+      questionList.appendChild(btn);
+    });
+  </script>
+</body>
+</html>
